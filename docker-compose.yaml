@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  gw-server:
+    build: ./gw-server
+    container_name: gw-server
+    env_file:
+      - ./gw-server/.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./gw-server:/app
+      - /app/node_modules
+  gw-db: 
+    container_name: gw-db
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./gw-db:/var/lib/postgresql/data
