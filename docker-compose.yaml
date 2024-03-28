@@ -10,10 +10,15 @@ services:
     volumes:
       - ./gw-server:/app
       - /app/node_modules
-  gw-db: 
-    container_name: gw-db
+  postgres: 
+    container_name: postgres
     image: postgres:14-alpine
     ports:
       - "5432:5432"
     volumes:
-      - ./gw-db:/var/lib/postgresql/data
+      - ./gw-db:/data/db
+    environment:
+      - POSTGRES_PASSWORD=gg@320
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=goodwords
+    restart: always
